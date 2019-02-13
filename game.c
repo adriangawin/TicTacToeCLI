@@ -102,8 +102,22 @@ void print_board( Board * board, GameParams * param )
 }
 
 void insert_player( Board * board, unsigned int position, const char c )
-{
-	*(board->board + position + MATRIX_X + 1) = c;
+{	
+	if ( c == 'X' )
+	{
+		*(board->board + position + MATRIX_X + 3) = '\\';
+		*(board->board + position + MATRIX_X + 5) = '/';
+		*(board->board + position + MATRIX_X * 2 + 4) = 'X';
+		*(board->board + position + MATRIX_X * 3 + 3) = '/';
+		*(board->board + position + MATRIX_X * 3 + 5) = '\\';
+	}
+	else if ( c == 'O' )
+	{
+		*(board->board + position + MATRIX_X + 4) = '-';
+		*(board->board + position + MATRIX_X * 2 + 2) = '|';
+		*(board->board + position + MATRIX_X * 2 + 6) = '|';
+		*(board->board + position + MATRIX_X * 3 + 4) = '-';	
+	}
 }
 
 void insert_ring( Board * board, unsigned int position )
