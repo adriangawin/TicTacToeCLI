@@ -61,6 +61,7 @@ typedef struct
 
 void init_game( GameParams * );
 void init_board( Board * );
+void clear_board( Board * );
 void deinit_board( Board * );
 void print_header(GameParams * );
 void print_board ( Board *, GameParams *);
@@ -72,7 +73,6 @@ void ask_names( GameParams * );
 void show_winer ( GameParams * );
 void change_turn ( GameParams * );
 void insert_board_character( Board * , const char, unsigned int, unsigned int );
-void print_board_matrix( Board * , GameParams * );
 void insert_board_player( Board * );
 void insert_board_lines( Board * );
 void insert_board_ring( Board * );

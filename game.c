@@ -25,6 +25,19 @@ void init_board( Board * board )
 	board->board = malloc( MATRIX_X * MATRIX_Y );
 }
 
+void clear_board( Board * board )
+{
+	for ( int cnt = 0; cnt < MATRIX_SIZE; ++cnt )
+	{
+		board->field[cnt] = PLATER_ANY;
+	}
+	board->ring_position = 5;
+	for ( int cnt = 0; cnt < MATRIX_X * MATRIX_Y; ++cnt )
+	{
+		board->board + cnt = ' ';
+	}
+}
+
 void deinit_board( Board * board )
 {
 	free( board->board );
@@ -51,17 +64,7 @@ void print_header( GameParams * params )
 	//printf("%u\n\r", params->cnt);
 }
 
-void print_board( Board * choice, GameParams * param )
-{
-
-}
-
-void insert_board_character( Board * board, const char c, unsigned int y, unsigned int x )
-{
-	*( board->board + y * MATRIX_X + x ) = c;
-}
-
-void print_board_matrix( Board * board, GameParams * param )
+void print_board( Board * board, GameParams * param )
 {
 	insert_board_lines( board );
 	insert_board_player( board );
@@ -96,6 +99,11 @@ void print_board_matrix( Board * board, GameParams * param )
 		}
 		printf("\n\r");
 	}
+}
+
+void insert_board_character( Board * board, const char c, unsigned int y, unsigned int x )
+{
+	*( board->board + y * MATRIX_X + x ) = c;
 }
 
 void insert_X( Board * board, unsigned int position )

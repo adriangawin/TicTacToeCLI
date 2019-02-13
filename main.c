@@ -28,7 +28,7 @@ int main()
 	ask_names( &params );
 	
 	print_header( &params );
-	print_board_matrix( &board, &params );
+	print_board( &board, &params );
 	
 	while ( run )
 	{
@@ -60,7 +60,7 @@ int main()
 						if ( check_winer( &params, &board ) )
 						{
 							show_winer( &params );
-							init_board( &board );
+							clear_board( &board );
 						}
 						change_turn( &params );
 					}
@@ -69,7 +69,7 @@ int main()
 		}
 
 		print_header( &params );
-		print_board_matrix( &board, &params );
+		print_board( &board, &params );
 	}
 	system("clear");
 	deinit_board( &board );
