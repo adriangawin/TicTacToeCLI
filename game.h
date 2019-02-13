@@ -72,7 +72,6 @@ unsigned int check_winer (GameParams *, Board * );
 void ask_names( GameParams * );
 void show_winer ( GameParams * );
 void change_turn ( GameParams * );
-void insert_board_character( Board * , const char, unsigned int, unsigned int );
 void insert_board_player( Board * );
 void insert_board_lines( Board * );
 void insert_board_ring( Board * );

@@ -29,12 +29,12 @@ void clear_board( Board * board )
 {
 	for ( int cnt = 0; cnt < MATRIX_SIZE; ++cnt )
 	{
-		board->field[cnt] = PLATER_ANY;
+		board->field[cnt] = PLAYER_ANY;
 	}
 	board->ring_position = 5;
 	for ( int cnt = 0; cnt < MATRIX_X * MATRIX_Y; ++cnt )
 	{
-		board->board + cnt = ' ';
+		*(board->board + cnt) = ' ';
 	}
 }
 
@@ -101,37 +101,98 @@ void print_board( Board * board, GameParams * param )
 	}
 }
 
-void insert_board_character( Board * board, const char c, unsigned int y, unsigned int x )
+void insert_player( Board * board, unsigned int position, const char c )
 {
-	*( board->board + y * MATRIX_X + x ) = c;
+	*(board->board + position + MATRIX_X + 1) = c;
 }
 
-void insert_X( Board * board, unsigned int position )
+void insert_ring( Board * board, unsigned int position )
 {
-	
-}
-
-void insert_O( Board * board, unsigned int position )
-{
-	
+	for ( int cnt = 0; cnt < MATRIX_LINE_X_1; ++cnt, ++cnt )
+	{
+		*(board->board + position + cnt) = '*';
+		*(board->board + position + cnt + 4 * MATRIX_X) = '*';
+	}
+	for ( int cnt = 1; cnt < MATRIX_LINE_Y_1 - 1; ++cnt )
+	{
+		*(board->board + position + cnt * MATRIX_X) = '*';
+		*(board->board + position + cnt * MATRIX_X + 8) = '*';
+	}
 }
 
 void insert_board_player( Board * board )
 {
-	if ( board->field[0] == PLAYER_X )
+	if ( board->field[0] == PLAYER_O )
 	{
-		insert_board_character( board, '\\', 1, 3 );
-		insert_board_character( board, '/', 1, 5 );
-		insert_board_character( board, 'X', 2, 4 );
-		insert_board_character( board, '/', 3, 3 );
-		insert_board_character( board, '\\', 3, 5 );
+		insert_player( board, MATRIX_FIELD_1, 'O');
 	}
-	else if ( board->field[0] == PLAYER_O )
+	else if ( board->field[0] == PLAYER_X )
 	{
-		insert_board_character( board, '-', 1, 4 );
-		insert_board_character( board, '|', 2, 2 );
-		insert_board_character( board, '|', 2, 6 );
-		insert_board_character( board, '-', 3, 4 );
+		insert_player( board, MATRIX_FIELD_1, 'X');
+	}
+	if ( board->field[1] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_2, 'O');
+	}
+	else if ( board->field[1] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_2, 'X');
+	}
+	if ( board->field[2] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_3, 'O');
+	}
+	else if ( board->field[2] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_3, 'X');
+	}
+	if ( board->field[3] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_4, 'O');
+	}
+	else if ( board->field[3] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_4, 'X');
+	}
+	if ( board->field[4] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_5, 'O');
+	}
+	else if ( board->field[4] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_5, 'X');
+	}
+	if ( board->field[5] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_6, 'O');
+	}
+	else if ( board->field[5] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_6, 'X');
+	}
+	if ( board->field[6] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_7, 'O');
+	}
+	else if ( board->field[6] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_7, 'X');
+	}
+	if ( board->field[7] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_8, 'O');
+	}
+	else if ( board->field[7] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_8, 'X');
+	}
+	if ( board->field[8] == PLAYER_O )
+	{
+		insert_player( board, MATRIX_FIELD_9, 'O');
+	}
+	else if ( board->field[8] == PLAYER_X )
+	{
+		insert_player( board, MATRIX_FIELD_9, 'X');
 	}
 }
 
@@ -140,31 +201,31 @@ void insert_board_ring( Board * board )
 	switch ( board->ring_position )
 	{
 		case 1:
-			insert_board_character( board, '*', 0, 0 );
+			insert_ring( board, MATRIX_FIELD_1);
 			break;
 		case 2:
-			*(board->board + 10) = '*';
+			insert_ring( board, MATRIX_FIELD_2);
 			break;
 		case 3:
-			*(board->board + 20) = '*';
+			insert_ring( board, MATRIX_FIELD_3);
 			break;
 		case 4:
-			*(board->board + 174) = '*';
+			insert_ring( board, MATRIX_FIELD_4);
 			break;
 		case 5:
-			*(board->board + 184) = '*';
+			insert_ring( board, MATRIX_FIELD_5);
 			break;
 		case 6:
-			*(board->board + 194) = '*';
+			insert_ring( board, MATRIX_FIELD_6);
 			break;
 		case 7:
-			*(board->board + 348) = '*';
+			insert_ring( board, MATRIX_FIELD_7);
 			break;
 		case 8:
-			*(board->board + 358) = '*';
+			insert_ring( board, MATRIX_FIELD_8);
 			break;
 		case 9:
-			*(board->board + 368) = '*';
+			insert_ring( board, MATRIX_FIELD_9);
 			break;
 	}
 }
